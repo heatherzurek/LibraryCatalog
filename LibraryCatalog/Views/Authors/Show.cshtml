@@ -1,0 +1,32 @@
+@using LibraryCatalog.Models;
+
+<h2>@Model["author"].Name</h2>
+<hr />
+
+@if (@Model["authorBooks"].Count != 0)
+{
+  <h4>Here are all the books of this author in this category:</h4>
+  <ul>
+    @foreach (var book in @Model["authorBooks"])
+    {
+      <li>@book.Title</li>
+    }
+  </ul>
+}
+
+<h4>Add a book to this author:</h4>
+
+<form action='/authors/@Model["author"].Id/books/new' method='post'>
+  <label for='bookId'>Select a book</label>
+  <select id='bookId' name='bookId' type='text'>
+
+    @foreach (var book in @Model["allBooks"])
+    {
+      <option value='@book.Id'>@book.Title</option>
+    }
+
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<p><a href="/">Return to Main Page</a></p>
