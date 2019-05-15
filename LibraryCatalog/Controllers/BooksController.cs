@@ -64,12 +64,14 @@ namespace LibraryCatalog.Controllers
       return RedirectToAction("Show",  new { id = bookId });
     }
 
-    // [HttpPost("/books/delete")]
-    // public ActionResult DeleteAll()
-    // {
-    //   Book.ClearAll();
-    //   return View();
-    // }
+    [HttpPost("/books/{bookId}/delete")]
+    public ActionResult Delete(int bookId)
+    {
+      Book Book = Book.Find(bookId);
+      Book.DeleteBook();
+      List<Book> allBooks = Book.GetAll();
+      return RedirectToAction("Index", allBooks);
+    }
     //
     // [HttpGet("/authors/{authorId}/books/{bookId}/edit")]
     // public ActionResult Edit(int authorId, int bookId)

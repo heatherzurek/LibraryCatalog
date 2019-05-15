@@ -167,7 +167,7 @@ namespace LibraryCatalog.Models
     }
 
 
-    public void Delete()
+    public void DeleteBook()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();

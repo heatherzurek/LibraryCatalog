@@ -62,5 +62,14 @@ namespace LibraryCatalog.Controllers
       return RedirectToAction("Show",  new { id = authorId });
     }
 
+    [HttpPost("/authors/{authorId}/delete")]
+    public ActionResult Delete(int authorId)
+    {
+      Author Author = Author.Find(authorId);
+      Author.Delete();
+      List<Author> allAuthors = Author.GetAll();
+      return RedirectToAction("Index", allAuthors);
+    }
+
   }
 }
