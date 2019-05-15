@@ -13,6 +13,7 @@ namespace LibraryCatalog.Models
     {
       Title = title;
       Id = id;
+      //copies = copies
     }
 
     public override bool Equals(System.Object otherBook)
@@ -180,6 +181,30 @@ namespace LibraryCatalog.Models
       {
         conn.Close();
       }
+    }
+
+    public static Book Search(string title)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM books WHERE title = @title;";
+      cmd.Parameters.AddWithValue("@title", title);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int bookId = 0;
+      string bookTitle = "";
+      while(rdr.Read())
+      {
+        bookId = rdr.GetInt32(0);
+        bookTitle = rdr.GetString(1);
+      }
+      Book newBook = new Book(bookTitle, bookId);
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return newBook;
     }
 
   }

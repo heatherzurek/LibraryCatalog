@@ -107,6 +107,8 @@ namespace LibraryCatalog.Models
       return allAuthors;
     }
 
+      //search by authors
+
     public List<Book> GetBooks()
     {
       MySqlConnection conn = DB.Connection();
