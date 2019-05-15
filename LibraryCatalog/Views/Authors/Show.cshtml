@@ -10,7 +10,9 @@
 
 
   @using LibraryCatalog.Models;
-
+  <div class="libphoto">
+  <center><img src="https://www.rachaelwhitaker.com/images/Portfolio/stjohns" alt="bridge image"></center>
+</div>
   <div class="container">
 
 
@@ -19,7 +21,7 @@
 
     @if (@Model["authorBooks"].Count != 0)
     {
-      <h4>Here are all the books of this author in this category:</h4>
+      <h4>Here are the books available by this author:</h4>
       <ul>
       @foreach (var book in @Model["authorBooks"])
       {
@@ -40,7 +42,7 @@
         }
 
       </select>
-      <button type='submit'>Add</button>
+      <button type='submit' class="btn btn-dark">Add</button>
     </form>
 
     <p><a href="/">Return to Main Page</a></p>

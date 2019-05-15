@@ -7,13 +7,15 @@
   <link rel='stylesheet' href='~/css/styles.css' type="text/css">
 </head>
 <body>
-
+  <div class="libphoto">
+  <center><img src="https://www.rachaelwhitaker.com/images/Portfolio/stjohns" alt="bridge image"></center>
+</div>
 <div class="container">
 
 
   <h1>St Johns Library Catalog</h1>
   <hr />
-  <h2>Authors:</h2>
+  <h2>Available Authors:</h2>
 
   @if (@Model.Count == 0)
   {
@@ -28,9 +30,9 @@
   </ul>
 
   <form action='/authors/search' method='post'>
-    <label for='name'> enter author name</label>
+    <label for='name'>Search Author</label>
     <input id='name' name='name' type='text'>
-    <button type='submit' class="btn btn-dark">Search</button>
+    <button type='submit' class="btn btn-dark">Search by Author</button>
   </form>
 
   <h4><a href="/authors/new">Add a new author</a></h4>
