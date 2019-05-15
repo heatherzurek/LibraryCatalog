@@ -30,6 +30,16 @@ namespace LibraryCatalog.Controllers
       return View("Index", allAuthors);
     }
 
+    [HttpPost("/authors/search")]
+    public ActionResult SearchByAuthor(string name)
+    {
+      // Book searchBook = new Book(title);
+      // searchBook.Save();
+      List<Author> matchAuthors = new List<Author>{};
+      matchAuthors.Add(Author.Search(name));
+      return View("Index", matchAuthors);
+    }
+
     [HttpGet("/authors/{id}")]
     public ActionResult Show(int id)
     {

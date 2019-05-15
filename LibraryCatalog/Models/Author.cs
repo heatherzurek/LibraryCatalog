@@ -185,6 +185,31 @@ namespace LibraryCatalog.Models
         }
       }
 
+      public static Author Search(string name)
+      {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT * FROM authors WHERE name = @name;";
+        cmd.Parameters.AddWithValue("@name", name);
+        var rdr = cmd.ExecuteReader() as MySqlDataReader;
+        int authorId = 0;
+        string authorName = "";
+        while(rdr.Read())
+        {
+          authorId = rdr.GetInt32(0);
+          authorName = rdr.GetString(1);
+        }
+        Author newAuthor = new Author(authorName, authorId);
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+        return newAuthor;
+      }
+
+
 
     }
   }

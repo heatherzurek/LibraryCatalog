@@ -1,20 +1,36 @@
-<h2>Book:</h2>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='~/css/styles.css' type="text/css">
+</head>
+<body>
+<div class="container">
 
-@if (Model.Count != 0)
-{
-  <ul>
+
+  <h2>Book:</h2>
+
+  @if (Model.Count != 0)
+  {
+    <ul>
     @foreach (var book in Model)
     {
       <li><a href='/books/@book.Id'>@book.Title</a></li>
     }
-  </ul>
-}
+    </ul>
+  }
 
-<form action='/books/search' method='post'>
-  <label for='title'> enter book title</label>
-  <input id='title' name='title' type='text'>
-  <button type='submit'>Search for book</button>
-</form>
+  <form action='/books/search' method='post'>
+    <label for='title'> enter book title</label>
+    <input id='title' name='title' type='text'>
+    <button type='submit'>Search for book</button>
+  </form>
 
-<h4><a href="/books/new">Add new book</a></h4>
-<h4><a href="/">Return home</a></h4>
+  <h4><a href="/books/new">Add new book</a></h4>
+  <h4><a href="/">Return home</a></h4>
+</div>
+
+</body>
+</html>

@@ -1,30 +1,48 @@
-@using LibraryCatalog.Models;
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='~/css/styles.css' type="text/css">
+</head>
+<body>
 
-<h2>Book: @Model["selectedBook"].Title</h2>
-<hr />
+<div class="container">
 
-@if (@Model["bookAuthors"].Count != 0)
-{
-  <h4>This book has these authors:</h4>
-  <ul>
+  @using LibraryCatalog.Models;
+
+  <h2>Book: @Model["selectedBook"].Title</h2>
+  <hr />
+
+  @if (@Model["bookAuthors"].Count != 0)
+  {
+    <h4>This book has these authors:</h4>
+    <ul>
     @foreach (Author author in @Model["bookAuthors"])
     {
       <li>@author.Name</li>
     }
-  </ul>
-}
+    </ul>
+  }
 
-<h4>Add a author to this book:</h4>
+  <h4>Add a author to this book:</h4>
 
-<form action='/books/@Model["selectedBook"].Id/Authors/new' method='post'>
-  <label for='authorId'>Select a author</label>
-  <select id='authorId' name='authorId' type='text'>
-    @foreach (var author in @Model["allAuthors"])
-    {
-      <option value='@author.Id'>@author.Name</option>
-    }
-  </select>
-  <button type='submit'>Add</button>
-</form>
+  <form action='/books/@Model["selectedBook"].Id/Authors/new' method='post'>
+    <label for='authorId'>Select a author</label>
+    <select id='authorId' name='authorId' type='text'>
+      @foreach (var author in @Model["allAuthors"])
+      {
+        <option value='@author.Id'>@author.Name</option>
+      }
+    </select>
+    <button type='submit'>Add</button>
+  </form>
 
-<p><a href="/">Return to Main Page</a></p>
+  <p><a href="/">Return to Main Page</a></p>
+
+</div>
+
+
+</body>
+</html>

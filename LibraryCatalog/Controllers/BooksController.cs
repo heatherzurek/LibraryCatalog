@@ -32,7 +32,7 @@ namespace LibraryCatalog.Controllers
 
 
     [HttpPost("/books/search")]
-    public ActionResult SearchByAuthor(string title)
+    public ActionResult SearchByBook(string title)
     {
       // Book searchBook = new Book(title);
       // searchBook.Save();

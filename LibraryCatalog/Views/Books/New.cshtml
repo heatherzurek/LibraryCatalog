@@ -1,13 +1,31 @@
-<h1>Add a new book</h1>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='~/css/styles.css' type="text/css">
+</head>
+<body>
 
-<form action='/books' method='post'>
-  <label for='title'>Book title</label>
-  <input id='title' name='title' type='text'>
+<div class="container">
 
-  <button type='submit'>Add book</button>
-</form>
+  <h1>Add a new book</h1>
+
+  <form action='/books' method='post'>
+    <label for='title'>Book title</label>
+    <input id='title' name='title' type='text'>
+
+    <button type='submit'>Add book</button>
+  </form>
 
 
 
-<p><a href="/">Back home</a></p>
-<p><a href="/books">View all books</a></p>
+  <p><a href="/">Back home</a></p>
+  <p><a href="/books">View all books</a></p>
+
+</div>
+
+
+</body>
+</html>

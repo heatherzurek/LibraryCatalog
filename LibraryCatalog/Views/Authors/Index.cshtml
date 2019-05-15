@@ -1,18 +1,42 @@
-<h1>St Johns Library Catalog</h1>
-<hr />
-<h2>Authors:</h2>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='~/css/styles.css' type="text/css">
+</head>
+<body>
 
-@if (@Model.Count == 0)
-{
-  <h3>No authors have been added yet!</h3>
-}
+<div class="container">
 
-<ul>
-  @foreach (var author in Model)
+
+  <h1>St Johns Library Catalog</h1>
+  <hr />
+  <h2>Authors:</h2>
+
+  @if (@Model.Count == 0)
   {
-    <li><a href='/authors/@author.Id'>@author.Name</a></li>
+    <h3>No authors have been added yet!</h3>
   }
-</ul>
 
-<h4><a href="/authors/new">Add a new author</a></h4>
-<h4><a href="/">Return home</a></h4>
+  <ul>
+    @foreach (var author in Model)
+    {
+      <li><a href='/authors/@author.Id'>@author.Name</a></li>
+    }
+  </ul>
+
+  <form action='/authors/search' method='post'>
+    <label for='name'> enter author name</label>
+    <input id='name' name='name' type='text'>
+    <button type='submit' class="btn btn-dark">Search</button>
+  </form>
+
+  <h4><a href="/authors/new">Add a new author</a></h4>
+  <h4><a href="/">Return home</a></h4>
+
+</div>
+
+</body>
+</html>
