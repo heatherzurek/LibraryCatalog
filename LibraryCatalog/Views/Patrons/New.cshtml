@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='~/css/styles.css' type="text/css">
+</head>
+<body>
+  <div class="libphoto">
+    <center><img src="https://www.rachaelwhitaker.com/images/Portfolio/stjohns" alt="bridge image"></center>
+  </div>
+  <div class="container">
+
+    <h1>Add a new book</h1>
+
+    <form action='/patrons' method='post'>
+      <label for='name'>Customer Name</label>
+      <input id='name' name='name' type='text'>
+      <label for='checkoutDate'>Checkout Date</label>
+      <input id='checkoutDate' name='checkoutDate' type='date'>
+      <button type='submit'class="btn btn-dark">Checkout</button>
+
+    </form>
+
+
+
+    <p><a href="/">Back home</a></p>
+    <p><a href="/patrons">View all patrons</a></p>
+
+  </div>
+
+
+</body>
+</html>

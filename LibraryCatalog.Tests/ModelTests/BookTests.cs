@@ -17,7 +17,7 @@ namespace LibraryCatalog.Tests
 
     public BookTest()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=library_catalog_test;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=library_catalog_test;Convert Zero Datetime=True";
     }
 
     [TestMethod]

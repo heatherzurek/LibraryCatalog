@@ -44,7 +44,7 @@ namespace LibraryCatalog
 
   public static class DBConfiguration
   {
-    public static string ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=library_catalog;";
+    public static string ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=library_catalog;Convert Zero Datetime=True";
   }
 
 }

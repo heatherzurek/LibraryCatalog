@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='~/css/styles.css' type="text/css">
+</head>
+<body>
+  <div class="libphoto">
+  <center><img src="https://www.rachaelwhitaker.com/images/Portfolio/stjohns" alt="bridge image"></center>
+</div>
+<div class="container">
+
+
+  <h2>Guests:</h2>
+
+  @if (Model.Count != 0)
+  {
+    <ul>
+    @foreach (var patron in Model)
+    {
+      <li><a href='/patrons/@patron.Id'>@patron.Name</a></li>
+    }
+    </ul>
+  }
+
+  @* <form action='/patrons/search' method='post'>
+    <label for='name'>Enter Book</label>
+    <input id='name' name='name' type='text'>
+    <button type='submit' class="btn btn-dark">Search by Book</button>
+  </form> *@
+
+  <h4><a href="/patrons/new">Checkout Books</a></h4>
+  <h4><a href="/">Return home</a></h4>
+</div>
+
+</body>
+</html>
