@@ -21,11 +21,12 @@
 
     @if (@Model["patronBooks"].Count != 0)
     {
-      <h4>Here are the books available by this patron:</h4>
+      <h4>Here are the books checked out by this patron:</h4>
       <ul>
       @foreach (var book in @Model["patronBooks"])
       {
         <li>@book.Title</li>
+        /* <li>@patron.CheckoutDate</li> */
       }
       </ul>
     }
