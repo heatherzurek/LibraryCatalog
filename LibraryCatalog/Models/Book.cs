@@ -188,7 +188,7 @@ namespace LibraryCatalog.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM books WHERE title = @title;";
+      cmd.CommandText = @"SELECT * FROM books WHERE title LIKE = @title;";
       cmd.Parameters.AddWithValue("@title", title);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int bookId = 0;

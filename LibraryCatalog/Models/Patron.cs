@@ -94,41 +94,98 @@ namespace LibraryCatalog.Models
       return allPatrons;
     }
 
-    // public static Patron Find(int id)
+    public static Patron Find(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM patrons WHERE id = (@searchId);";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = id;
+      cmd.Parameters.Add(searchId);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int PatronId = 0;
+      string PatronName = "";
+      DateTime PatronCheckoutDate = new DateTime(2000, 11, 11);
+      while(rdr.Read())
+      {
+        PatronId = rdr.GetInt32(0);
+        PatronName = rdr.GetString(1);
+        PatronCheckoutDate = rdr.GetDateTime(2);
+      }
+      Patron newPatron = new Patron(PatronName, PatronCheckoutDate, PatronId);
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return newPatron;
+    }
+
+    // public static Author Find(int id)
     // {
     //   MySqlConnection conn = DB.Connection();
     //   conn.Open();
     //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"SELECT * FROM patrons WHERE id = (@searchId);";
+    //   cmd.CommandText = @"SELECT * FROM authors WHERE id = (@searchId);";
     //   MySqlParameter searchId = new MySqlParameter();
     //   searchId.ParameterName = "@searchId";
     //   searchId.Value = id;
     //   cmd.Parameters.Add(searchId);
     //   var rdr = cmd.ExecuteReader() as MySqlDataReader;
-    //   int patronId = 0;
-    //   string patronName = "";
-    //   DateTime patronCheckoutDate = new DateTime(2000, 11, 11);
+    //   int AuthorId = 0;
+    //   string AuthorName = "";
     //   while(rdr.Read())
     //   {
-    //     int patronId = rdr.GetInt32(0);
-    //     string patronName = rdr.GetString(1);
-    //     DateTime patronCheckoutDate = rdr.GetDateTime(2);
+    //     AuthorId = rdr.GetInt32(0);
+    //     AuthorName = rdr.GetString(1);
     //   }
-    //   Patron newPatron = new Patron(patronName, patronCheckoutDate, patronId);
+    //   Author newAuthor = new Author(AuthorName, AuthorId);
     //   conn.Close();
     //   if (conn != null)
     //   {
     //     conn.Dispose();
     //   }
-    //   return newPatron;
+    //   return newAuthor;
     // }
+
+    public List<Book> GetBooks()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT books.* FROM patrons
+      JOIN checkouts ON (patrons.id = checkouts.patrons_id)
+      JOIN books ON (checkouts.book_id = books.id)
+      WHERE patrons.id = @PatronId;";
+      MySqlParameter patronIdParameter = new MySqlParameter();
+      patronIdParameter.ParameterName = "@PatronId";
+      patronIdParameter.Value = Id;
+      cmd.Parameters.Add(patronIdParameter);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      List<Book> books = new List<Book>{};
+      while(rdr.Read())
+      {
+        int bookId = rdr.GetInt32(0);
+        string bookName = rdr.GetString(1);
+        Book newBook = new Book(bookName, bookId);
+        books.Add(newBook);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return books;
+    }
 
     public void AddBook(Book newBook)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO checkouts (patron_id, book_id) VALUES (@PatronId, @BookId);";
+      cmd.CommandText = @"INSERT INTO checkouts (patrons_id, book_id) VALUES (@PatronId, @BookId);";
       // MySqlParameter patron_id = new MySqlParameter();
       // patron_id.ParameterName = "@PatronId";
       // patron_id.Value = Id;

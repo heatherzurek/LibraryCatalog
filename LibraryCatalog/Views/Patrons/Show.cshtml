@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='~/css/styles.css' type="text/css">
+</head>
+<body>
+
+
+  @using LibraryCatalog.Models;
+  <div class="libphoto">
+  <center><img src="https://www.rachaelwhitaker.com/images/Portfolio/stjohns" alt="bridge image"></center>
+</div>
+  <div class="container">
+
+
+    <h2>@Model["patron"].Name</h2>
+    <hr />
+
+    @if (@Model["patronBooks"].Count != 0)
+    {
+      <h4>Here are the books available by this patron:</h4>
+      <ul>
+      @foreach (var book in @Model["patronBooks"])
+      {
+        <li>@book.Title</li>
+      }
+      </ul>
+    }
+
+    <h4>Add a book to this patron:</h4>
+
+    <form action='/patrons/@Model["patron"].Id/books/new' method='post'>
+      <label for='bookId'>Select a book</label>
+      <select id='bookId' name='bookId' type='text'>
+
+        @foreach (var book in @Model["allBooks"])
+        {
+          <option value='@book.Id'>@book.Title</option>
+        }
+
+      </select>
+      <button type='submit' class="btn btn-dark">Add</button>
+    </form>
+
+    @* <form action='/patrons/@Model["patron"].Id/delete' method="post">
+      <button type="submit">Delete Patron</button>
+    </form> *@
+
+    <p><a href="/">Return to Main Page</a></p>
+
+  </div>
+
+</body>
+</html>
