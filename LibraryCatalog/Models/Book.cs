@@ -119,7 +119,7 @@ namespace LibraryCatalog.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO catalogs (author_id, book_id) VALUES (@AuthorId, @BookId);";
+      cmd.CommandText = @"INSERT INTO checkouts (author_id, book_id) VALUES (@AuthorId, @BookId);";
       MySqlParameter author_id = new MySqlParameter();
       author_id.ParameterName = "@AuthorId";
       author_id.Value = newAuthor.Id;
@@ -142,8 +142,8 @@ namespace LibraryCatalog.Models
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT authors.* FROM books
-      JOIN catalogs ON (books.id = catalogs.book_id)
-      JOIN authors ON (catalogs.author_id = authors.id)
+      JOIN checkouts ON (books.id = checkouts.book_id)
+      JOIN authors ON (checkouts.author_id = authors.id)
       WHERE books.id = @BookId;";
       MySqlParameter bookIdParameter = new MySqlParameter();
       bookIdParameter.ParameterName = "@BookId";
@@ -171,7 +171,7 @@ namespace LibraryCatalog.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
-      MySqlCommand cmd = new MySqlCommand("DELETE FROM books WHERE id = @BookId; DELETE FROM catalogs WHERE book_id = @BookId;", conn);
+      MySqlCommand cmd = new MySqlCommand("DELETE FROM books WHERE id = @BookId; DELETE FROM checkouts WHERE book_id = @BookId;", conn);
       MySqlParameter bookIdParameter = new MySqlParameter();
       bookIdParameter.ParameterName = "@BookId";
       bookIdParameter.Value = this.Id;
